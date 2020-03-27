@@ -1,15 +1,15 @@
 import Main from "../views/Main";
-import Posts from "../components/Posts";
+import UpcomingMovies from "../components/UpcomingMovies";
 
 export default [
   {
     path: "/",
     component: Main,
-    redirect: "/posts",
+    redirect: "/upcoming-movies",
     children: [
       {
-        path: "/posts",
-        component: Posts,
+        path: "/upcoming-movies",
+        component: UpcomingMovies,
       },
     ],
   },

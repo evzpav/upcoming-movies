@@ -2,14 +2,10 @@ const express = require("express");
 
 const app = express();
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const config = require("./config/config");
 const router = require("./router/router");
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false, limit: "500kb" }));
-app.use(bodyParser.json({ limit: "500kb" }));
-
 app.use((req, res, next) => {
   res.header("X-XSS-Protection", "0");
   res.header("X-Content-Type-Options", "nosniff");
@@ -17,11 +13,16 @@ app.use((req, res, next) => {
   next();
 });
 
-const Client = require("./clients/client")();
-const Service = require("./services/service")(Client);
-const Controller = require("./controllers/controller")(Service);
+if (!config.moviesApiToken) {
+  console.error("TMBD_API_TOKEN env var is required");
+  process.exit(1);
+}
 
-router(app, Controller);
+const TMDbClient = require("./clients/TMDb.client")(config.moviesApiToken);
+const MovieService = require("./services/movie.service")(TMDbClient);
+const MovieController = require("./controllers/movie.controller")(MovieService);
+
+router(app, MovieController);
 
 const server = app.listen(config.port, err => {
   if (err) {

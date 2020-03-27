@@ -1,10 +1,8 @@
-.DEFAULT_GOAL := all 
+.DEFAULT_GOAL := help
 
-NAME = posts
+NAME = upcoming-movies
 VERSION = 1.0.0
 PORT = 3000
-
-all: install build-front ## Run pipeline
 
 install: ## install server and client dependencies locally
 	npm install
@@ -38,11 +36,13 @@ run-docker: build-image ## run server on docker
 	DOCKER_BUILDKIT=1 \
 	docker run --rm \
 		-e PORT=$(PORT) \
+		-e TMBD_API_TOKEN=$(TMBD_API_TOKEN) \
 		--network host \
 		$(NAME):$(VERSION)
 
 run: ## run locally
 	PORT=$(PORT) \
+	TMBD_API_TOKEN=$(TMBD_API_TOKEN) \
 	node ./server/server.js
 
 lint: ## format code

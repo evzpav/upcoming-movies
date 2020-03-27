@@ -5,6 +5,9 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 import routes from "./routes";
 
+import infiniteScroll from "vue-infinite-scroll";
+Vue.use(infiniteScroll);
+
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 Vue.use(Buefy);

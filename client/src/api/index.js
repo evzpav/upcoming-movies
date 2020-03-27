@@ -1,8 +1,11 @@
 import axios from "axios";
 import { apiUrl } from "../config/config";
 
-function getPosts() {
-  return baseRequest("GET", apiUrl, "/posts");
+function getUpcomingMovies(page) {
+  return baseRequest("GET", apiUrl, `/movie/upcoming?page=${page}`);
+}
+function getMovieDetails(id) {
+  return baseRequest("GET", apiUrl, `/movie/${id}`);
 }
 
 function baseRequest(method, url, uri, data = "") {
@@ -17,4 +20,4 @@ function baseRequest(method, url, uri, data = "") {
   });
 }
 
-export { getPosts };
+export { getUpcomingMovies, getMovieDetails };
