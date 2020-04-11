@@ -1,0 +1,97 @@
+{
+    "adult": false,
+    "backdrop_path": "/mQo71VE4h0ea5BV4SShtvi6z5Yr.jpg",
+    "belongs_to_collection": null,
+    "budget": 11500,
+    "genres": [
+        {
+            "id": 14,
+            "name": "Fantasy"
+        },
+        {
+            "id": 10751,
+            "name": "Family"
+        }
+    ],
+    "homepage": "",
+    "id": 413518,
+    "imdb_id": "tt8333746",
+    "original_language": "it",
+    "original_title": "Pinocchio",
+    "overview": "Live-action adaptation of the classic story of a wooden puppet named Pinocchio who comes to life.",
+    "popularity": 12.605,
+    "poster_path": "/sxNgJIGT0z9DZgEaD29HFOQZcAG.jpg",
+    "production_companies": [
+        {
+            "id": 11011,
+            "logo_path": null,
+            "name": "Fonds Eurimages du Conseil de l'Europe",
+            "origin_country": ""
+        },
+        {
+            "id": 53334,
+            "logo_path": "/nuY4cvsxmTTHrGATRil6uLLHry5.png",
+            "name": "Archimede",
+            "origin_country": "IT"
+        },
+        {
+            "id": 11561,
+            "logo_path": "/8HB3TFUeo83keAPHfFfrNtN2MmA.png",
+            "name": "Recorded Picture Company",
+            "origin_country": "GB"
+        },
+        {
+            "id": 5125,
+            "logo_path": "/t3oWTsVukmEzrZzvfr37XRBibo5.png",
+            "name": "Le Pacte",
+            "origin_country": "FR"
+        },
+        {
+            "id": 2683,
+            "logo_path": "/mOL2WcHtox2urbUf1oJvjw7kz01.png",
+            "name": "Rai Cinema",
+            "origin_country": "IT"
+        },
+        {
+            "id": 14016,
+            "logo_path": "/snclwsIZQbgvqYCBJP8fqNlCA5y.png",
+            "name": "Ministero per i Beni e le Attività Culturali",
+            "origin_country": "IT"
+        },
+        {
+            "id": 18973,
+            "logo_path": "/lM081nCPhuKIPc2lJWstsQAlIaJ.png",
+            "name": "01 Distribution",
+            "origin_country": "IT"
+        }
+    ],
+    "production_countries": [
+        {
+            "iso_3166_1": "FR",
+            "name": "France"
+        },
+        {
+            "iso_3166_1": "IT",
+            "name": "Italy"
+        },
+        {
+            "iso_3166_1": "GB",
+            "name": "United Kingdom"
+        }
+    ],
+    "release_date": "2019-12-19",
+    "revenue": 0,
+    "runtime": 125,
+    "spoken_languages": [
+        {
+            "iso_639_1": "it",
+            "name": "Italiano"
+        }
+    ],
+    "status": "Released",
+    "tagline": "The most beloved fairy tale comes to life",
+    "title": "Pinocchio",
+    "video": false,
+    "vote_average": 7.1,
+    "vote_count": 316
+}
