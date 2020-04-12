@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 import MovieDetails from "./MovieDetails";
-
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getUpcomingMovies, getMovieDetails } from "../api";
 import "react-bulma-components/dist/react-bulma-components.min.css";
@@ -59,13 +58,13 @@ function Movies() {
       return resp.data;
     } catch (error) {
       console.log(error);
-      alert("couild not load details")
+      alert("couild not load details");
     } finally {
       setLoading(false);
     }
   };
   const openDetailsModal = async (id: any) => {
-    const details = await loadDetails(id)
+    const details = await loadDetails(id);
     console.log("open modal", id);
     setModalState(!modalState);
     setMovieDetails(details);
@@ -80,6 +79,10 @@ function Movies() {
       ""
     );
 
+  const infiniteScrollStyle = {
+    overflow: "hidden"
+  }
+  
   return (
     <div className="container">
       <MovieDetails
@@ -100,6 +103,7 @@ function Movies() {
       </div>
 
       <InfiniteScroll
+        style={infiniteScrollStyle}
         dataLength={movies.length}
         next={listMovies}
         hasMore={hasMore}

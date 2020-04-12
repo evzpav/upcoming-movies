@@ -19,7 +19,9 @@ The Controller handles the http interface(API routes) and communicates to the Se
 - [prettier](https://www.npmjs.com/package/prettier) - format code
 - [eslint](https://www.npmjs.com/package/eslint) - code lint warnings
 
-### Client (VueJS)
+### Clients (React + Typescript) and Vuejs
+
+### VueJS)
 On the frontend, when the "/" is called, it will redirect to the route "/upcoming-movies" and it will list the movies and show them in cards of the first page received from the server.
 While scrolling to the bottom of the page it will load the next page of data and append to the list shown in the page, providing a infinite scroll feature.
 The search input on the right top corner, does a simple string search on the titles of movies on the array of movies that were already loaded(in memory) on the page.
@@ -62,16 +64,27 @@ make run-docker
 # Download dependencies for client and server
 make install
 
-# Generate build files for client (./dist folder)
-make build-front
+# Generate build files for client (./build folder)
+make build-vue
 
-# Run server (it will also serve the ./dist folder)
+# Run server (it will also serve the ./build folder)
 TMBD_API_TOKEN=token \ # Set TMDb API token as environment variable
 make run
 
 # Server will be running on http://localhost:4000
 
 ```
+
+### Run frontend locally for development
+
+```bash
+# React
+make run-react
+
+# Vue
+make run-vue
+``` 
+
 
 ### Unit Tests
 The business logic inside server/services is tested within ./tests folder using [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com):
@@ -111,15 +124,15 @@ make run-swagger
 
 
 ### Deployment to Heroku or Dokku
-To deploy this project to Heroku as one app only, the server will be serving the static content of the ./client/dist folder.
-For that, the way I figured to make it work it is to commit the ./client/dist folder to git.
+To deploy this project to Heroku as one app only, the server will be serving the static content of the ./vue-client/build folder.
+For that, the way I figured to make it work it is to commit the ./vue-client/build folder to git.
 
 ```bash
 
 # Build front needs to be done locally
-make build-front
+make build-vue
 
-# And on .gitignore ./client/dist folder needs to be removed
+# And on .gitignore ./vue-client/build folder needs to be removed
 # So the static files are commited when sent to heroku/dokku
 
 ```

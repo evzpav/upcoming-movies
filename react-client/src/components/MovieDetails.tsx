@@ -1,11 +1,11 @@
-import React,{useState} from "react";
+import React from "react";
 import Modal from "./Modal";
 import "./MovieDetails.css"
 
 const noImagePlaceholder = "/no-image-placeholder.png";
 
 
-const MovieDetails = ({ children, toggleModal, modalOpen, details }: any) => {
+const MovieDetails = ({ toggleModal, modalOpen, details }: any) => {
   
   const resolveImagePath = (movie:any)=> {
     if (!movie || !movie.poster_path) {

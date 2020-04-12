@@ -23,10 +23,10 @@ RUN npm test
 
 # ---- Front ----
 FROM base AS front
-WORKDIR /client
-COPY --chown=node:node ./client/package*.json ./
+WORKDIR /vue-client
+COPY --chown=node:node ./vue-client/package*.json ./
 RUN npm ci && npm cache clean --force
-COPY --chown=node:node /client ./
+COPY --chown=node:node /vue-client ./
 RUN npm run build
 
 # ---- Release ----
