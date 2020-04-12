@@ -2,7 +2,7 @@
 
 NAME = upcoming-movies
 VERSION = 1.0.0
-PORT = 3000
+PORT = 4000
 
 install: ## install server and client dependencies locally
 	npm install

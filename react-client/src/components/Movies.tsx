@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
+import MovieDetails from "./MovieDetails";
+
 import InfiniteScroll from "react-infinite-scroll-component";
-import { getUpcomingMovies } from "../api";
+import { getUpcomingMovies, getMovieDetails } from "../api";
 import "react-bulma-components/dist/react-bulma-components.min.css";
 import "./Movies.css";
 
 function Movies() {
+  const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [moviesCopy, setMoviesCopy] = useState([]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [modalState, setModalState] = useState(false);
+  const [movieDetails, setMovieDetails] = useState({});
   const hasMore = page < totalPages;
 
   const listMovies = async () => {
@@ -21,9 +26,6 @@ function Movies() {
     }
     setMovies(movies.concat(newMovies));
     setMoviesCopy(movies.concat(newMovies));
-    console.log("movies", movies.length);
-    console.log("moviesC", moviesCopy.length);
-
     setPage(page + 1);
   };
 
@@ -42,18 +44,49 @@ function Movies() {
     }
   };
 
+  const toggleModal = () => {
+    setModalState(!modalState);
+  };
+
   useEffect(() => {
     listMovies();
   }, []);
 
-  const endMessage = (
-    <p style={{ textAlign: "center" }}>
-      <b>Total of {movies.length} movies.</b>
-    </p>
-  );
+  const loadDetails = async (id: number) => {
+    setLoading(true);
+    try {
+      const resp = await getMovieDetails(id);
+      return resp.data;
+    } catch (error) {
+      console.log(error);
+      alert("couild not load details")
+    } finally {
+      setLoading(false);
+    }
+  };
+  const openDetailsModal = async (id: any) => {
+    const details = await loadDetails(id)
+    console.log("open modal", id);
+    setModalState(!modalState);
+    setMovieDetails(details);
+  };
+
+  const endMessage =
+    movies.length > 0 ? (
+      <p style={{ textAlign: "center" }}>
+        <b>Total of {movies.length} movies.</b>
+      </p>
+    ) : (
+      ""
+    );
 
   return (
     <div className="container">
+      <MovieDetails
+        toggleModal={toggleModal}
+        modalOpen={modalState}
+        details={movieDetails}
+      ></MovieDetails>
       <div id="header">
         <div className="title">Upcoming Movies</div>
         <input
@@ -71,10 +104,16 @@ function Movies() {
         next={listMovies}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
-        endMessage={movies.length > 0 ? endMessage : ""}
+        endMessage={endMessage}
       >
         {movies.map((movie: any) => {
-          return <MovieCard key={movie.id} movie={movie}></MovieCard>;
+          return (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              onClick={() => openDetailsModal(movie.id)}
+            ></MovieCard>
+          );
         })}
       </InfiniteScroll>
     </div>

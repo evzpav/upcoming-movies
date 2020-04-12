@@ -47,7 +47,7 @@ Below you can find 2 ways to run this project.
 TMBD_API_TOKEN=token \ # Set TMDb API token as environment variable
 make run-docker
 
-# Server will be running on http://localhost:3000
+# Server will be running on http://localhost:4000
 
 ```
 
@@ -69,7 +69,7 @@ make build-front
 TMBD_API_TOKEN=token \ # Set TMDb API token as environment variable
 make run
 
-# Server will be running on http://localhost:3000
+# Server will be running on http://localhost:4000
 
 ```
 
