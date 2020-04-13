@@ -1,14 +1,14 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import "./Spinner.css";
 
-function Spinner({ loading, fullPage, text }: any) {
+function Spinner({ loading, fullPage, text }: any): ReactElement | null {
   if (!loading) {
     return null;
   }
 
   let spinnerClass = "full-page";
   let spinnerText = "Loading...";
-  
+
   if (fullPage === false) {
     spinnerClass = "";
   }

@@ -25,7 +25,7 @@ While scrolling to the bottom of the page it will load the next page of data and
 The search input on the right top corner, does a simple string search on the titles of movies on the array of movies that were already loaded(in memory) on the page.
 The click on a movie card, will open a modal with a larger poster and more details of the movie selected.
 
-#### Third party Libraries used on Frontend:
+#### Third party Libraries used on Vue:
 - [axios](https://www.npmjs.com/package/axios) - http requests
 - [vue-router](https://www.npmjs.com/package/vue-router)  - routes
 - [vue-infinite-scroll](https://www.npmjs.com/package/vue-infinite-scroll)  - handle scrolling to load more movies
@@ -35,9 +35,11 @@ The click on a movie card, will open a modal with a larger poster and more detai
 ###  Frontend 2 (React + Typescript)
 Functionality is the same as in the Vue one, but has no routes.
 
-#### Third party Libraries used on Frontend:
+#### Third party Libraries used on React:
 - [axios](https://www.npmjs.com/package/axios) - http requests
-- [react-infinite-scroll-component](https://www.npmjs.com/package/react-infinite-scroll-component)  - handle scrolling to load more movies
+- [react-bulma-components](https://www.npmjs.com/package/react-bulma-components) - Bulma css
+- [react-infinite-scroll-component](https://www.npmjs.com/package/react-infinite-scroll-component) 
+- [react-toastify](https://www.npmjs.com/package/react-toastify) - toast component for request errors
 - [eslint](https://www.npmjs.com/package/eslint) - code lint warnings
 
 ## Instructions to run

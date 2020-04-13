@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import "./Modal.css";
 
-const Modal = ({ children, closeModal, modalState }:any): ReactElement | null=> {
+const Modal = ({ children, closeModal, modalState }: any): ReactElement | null => {
   if (!modalState) {
     return null;
   }
@@ -14,7 +14,7 @@ const Modal = ({ children, closeModal, modalState }:any): ReactElement | null=> 
           <button className="delete" onClick={closeModal} />
         </header>
         {children}
-       </div>
+      </div>
     </div>
   );
 };

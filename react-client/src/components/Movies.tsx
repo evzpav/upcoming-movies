@@ -1,10 +1,12 @@
 import React, { useState, useEffect, ReactElement } from "react";
+import { getUpcomingMovies, getMovieDetails } from "../api";
+import { ToastContainer, toast } from "react-toastify";
 import MovieCard from "./MovieCard";
 import MovieDetails from "./MovieDetails";
 import Spinner from "./Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { getUpcomingMovies, getMovieDetails } from "../api";
 import "react-bulma-components/dist/react-bulma-components.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import "./Movies.css";
 
 function Movies(): ReactElement {
@@ -19,14 +21,17 @@ function Movies(): ReactElement {
   const [movieDetails, setMovieDetails] = useState({});
   const hasMore = page < totalPages;
 
+  const notify = (msg: string) =>
+    toast.error(msg, { position: "top-right", autoClose: 5000, hideProgressBar: true });
+
   const loadMovies = async (page: number) => {
     setLoadingMovies(true);
     try {
-      const resp = await getUpcomingMovies(page);   
-      return resp.data
+      const resp = await getUpcomingMovies(page);
+      return resp.data;
     } catch (error) {
       console.log(error);
-      alert("could not load movies");
+      notify("failed to load movies");
     } finally {
       setLoadingMovies(false);
     }
@@ -34,6 +39,9 @@ function Movies(): ReactElement {
 
   const listMovies = async () => {
     const data = await loadMovies(page);
+    if (!data || !data.results) {
+      return;
+    }
     const newMovies = data.results;
     if (totalPages === 0) {
       setTotalPages(data.total_pages);
@@ -64,7 +72,7 @@ function Movies(): ReactElement {
       return resp.data;
     } catch (error) {
       console.log(error);
-      alert("could not load details");
+      notify("failed to load details");
     } finally {
       setLoadingDetails(false);
     }
@@ -72,17 +80,20 @@ function Movies(): ReactElement {
 
   const openDetailsModal = async (id: any) => {
     const details = await loadDetails(id);
+    if (!details) {
+      return;
+    }
     setModalState(!modalState);
     setMovieDetails(details);
   };
 
-  const toggleModal = () => {
+  const toggleModal = (): void => {
     setModalState(!modalState);
   };
 
   useEffect(() => {
     listMovies();
-  }, [listMovies, page]);
+  }, [page]);
 
   const endMessage =
     movies.length > 0 ? (
@@ -126,10 +137,10 @@ function Movies(): ReactElement {
           loader={<h4>Loading...</h4>}
           endMessage={endMessage}
         >
-          {movies.map((movie: any) => {
+          {movies.map((movie: any, index: number) => {
             return (
               <MovieCard
-                key={movie.id}
+                key={movie.id + index}
                 movie={movie}
                 onClick={() => openDetailsModal(movie.id)}
               ></MovieCard>
@@ -137,6 +148,7 @@ function Movies(): ReactElement {
           })}
         </InfiniteScroll>
         <Spinner loading={loadingMovies} />
+        <ToastContainer hideProgressBar />
       </div>
     </section>
   );
