@@ -1,6 +1,7 @@
-import React from "react";
+import React, { ReactElement } from "react";
+import "./Modal.css";
 
-const Modal = ({ children, closeModal, modalState }: any) => {
+const Modal = ({ children, closeModal, modalState }:any): ReactElement | null=> {
   if (!modalState) {
     return null;
   }
@@ -8,27 +9,14 @@ const Modal = ({ children, closeModal, modalState }: any) => {
   return (
     <div className="modal is-active">
       <div className="modal-background" onClick={closeModal} />
-      <div className="modal-card">
-        <header className="modal-card-head">
+      <div className="modal-window">
+        <header className="modal-header">
           <button className="delete" onClick={closeModal} />
         </header>
-        <section className="modal-card-body">
-          <div className="content">{children}</div>
-        </section>
-        {/* <footer className="modal-card-foot">
-          <a className="button" onClick={closeModal}>
-            OK
-          </a>
-        </footer> */}
-      </div>
+        {children}
+       </div>
     </div>
   );
 };
-
-// Modal.propTypes = {
-//   closeModal: PropTypes.func.isRequired,
-//   modalState: PropTypes.bool.isRequired,
-//   title: PropTypes.string,
-// };
 
 export default Modal;

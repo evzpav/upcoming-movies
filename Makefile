@@ -57,6 +57,7 @@ lint: ## format code
 	cd ./vue-client && npm run format
 	npm run format
 	cd ./vue-client && npm run lint
+	cd ./react-client && npm run lint
 	npm run lint
 
 run-swagger:  ## run Swagger OpenAPI doc server.

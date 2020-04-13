@@ -3,7 +3,7 @@
 It is a web app and server API that integrates to The Movie Database ([TMDb](https://developers.themoviedb.org/3)) to show the list of upcoming movies and some details of them on a modal.
 
 ## Architecture
-It consists of a backend server in [NodeJs](https://nodejs.org) with Express and a frontend client in [VueJs](https://vuejs.org/).
+It consists of a backend server in [NodeJs](https://nodejs.org) with Express and 2 frontend clients, one in [VueJs](https://vuejs.org/) and the other in [React](https://reactjs.org/).
 
 ### Server (NodeJs): 
 The architecture design for the server tries to follow the [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)).
@@ -19,9 +19,7 @@ The Controller handles the http interface(API routes) and communicates to the Se
 - [prettier](https://www.npmjs.com/package/prettier) - format code
 - [eslint](https://www.npmjs.com/package/eslint) - code lint warnings
 
-### Clients (React + Typescript) and Vuejs
-
-### VueJS)
+### Frontend 1 (Vue)
 On the frontend, when the "/" is called, it will redirect to the route "/upcoming-movies" and it will list the movies and show them in cards of the first page received from the server.
 While scrolling to the bottom of the page it will load the next page of data and append to the list shown in the page, providing a infinite scroll feature.
 The search input on the right top corner, does a simple string search on the titles of movies on the array of movies that were already loaded(in memory) on the page.
@@ -32,6 +30,14 @@ The click on a movie card, will open a modal with a larger poster and more detai
 - [vue-router](https://www.npmjs.com/package/vue-router)  - routes
 - [vue-infinite-scroll](https://www.npmjs.com/package/vue-infinite-scroll)  - handle scrolling to load more movies
 - [buefy](https://www.npmjs.com/package/buefy)  - UI components: Vue + Bulma (CSS framework)
+- [eslint](https://www.npmjs.com/package/eslint) - code lint warnings
+
+###  Frontend 2 (React + Typescript)
+Functionality is the same as in the Vue one, but has no routes.
+
+#### Third party Libraries used on Frontend:
+- [axios](https://www.npmjs.com/package/axios) - http requests
+- [react-infinite-scroll-component](https://www.npmjs.com/package/react-infinite-scroll-component)  - handle scrolling to load more movies
 - [eslint](https://www.npmjs.com/package/eslint) - code lint warnings
 
 ## Instructions to run

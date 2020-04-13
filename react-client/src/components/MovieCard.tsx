@@ -4,22 +4,23 @@ import "./MovieCard.css";
 
 const noImagePlaceholder = "/no-image-placeholder.png";
 
-// interface Movie {
-//   title:string;
-//   id:number;
-//   genres:string;
-//   overview:string;
-//   release_date:string;
-// }
+interface Movie {
+  title: string;
+  id: number;
+  genres: string;
+  overview: string;
+  release_date: string;
+  poster_path: string;
+}
 
-function resolveImagePath(movie: any) {
+function resolveImagePath(movie: Movie) {
   if (!movie || !movie.poster_path) {
     return noImagePlaceholder;
   }
   return movie.poster_path;
 }
 
-function MovieCard({movie, onClick}:any) {
+function MovieCard({ movie, onClick }: any) {
   return (
     <div className="card card-content" id="movie-card" onClick={onClick}>
       <div className="media-left" id="poster">

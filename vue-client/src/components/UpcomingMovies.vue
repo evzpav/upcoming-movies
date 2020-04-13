@@ -2,16 +2,7 @@
   <div class="container">
     <div id="header">
       <div class="title">Upcoming Movies</div>
-      <b-field>
-        <b-input
-          placeholder="Search..."
-          type="search"
-          icon="magnify"
-          icon-clickable
-          v-model="search"
-        >
-        </b-input>
-      </b-field>
+      <input placeholder="Search..." v-model="search" class="input" type="text" id="search-input">
     </div>
     <span v-if="loading && moviesList.length === 0">Loading movies...</span>
     <span v-if="!loading && moviesList.length === 0">No movie found</span>
@@ -157,6 +148,11 @@ export default {
 </script>
 
 <style scoped>
+
+#search-input {
+  width: auto;
+}
+
 #header {
   display: flex;
   align-items: center;

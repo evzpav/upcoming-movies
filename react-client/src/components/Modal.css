@@ -2,3 +2,13 @@
   opacity: 1;
   transition: opacity 300ms ease-in-out;
 }
+
+.modal-header{
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.modal-window {
+    max-width: 1000px;
+}

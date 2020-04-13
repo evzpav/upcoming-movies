@@ -9,28 +9,28 @@
         <p class="subtitle is-4">{{ details.tagline }}</p>
         <p class="subtitle is-6">{{ details.genres }}</p>
 
-        <b-field grouped group-multiline>
+        <div class="field is-grouped is-grouped-multiline">
           <div class="control">
-            <b-taglist attached>
-              <b-tag type="is-info">{{ details.vote_average }}</b-tag>
-              <b-tag type="is-secondary">Vote Average</b-tag>
-            </b-taglist>
+            <div class="tags has-addons">
+              <span class="tag is-info">{{ details.vote_average }}</span>
+              <span class="tag is-seconday">Vote Average</span>
+            </div>
           </div>
 
           <div class="control">
-            <b-taglist attached>
-              <b-tag type="is-info">{{ details.vote_count }}</b-tag>
-              <b-tag type="is-secondary">Votes</b-tag>
-            </b-taglist>
+            <div class="tags has-addons">
+              <span class="tag is-info">{{ details.vote_count }}</span>
+              <span class="tag is-seconday">Votes</span>
+            </div>
           </div>
 
           <div class="control">
-            <b-taglist attached>
-              <b-tag type="is-info">{{ details.popularity }}</b-tag>
-              <b-tag type="is-secondary">Popularity</b-tag>
-            </b-taglist>
+            <div class="tags has-addons">
+              <span class="tag is-info">{{ details.popularity }}</span>
+              <span class="tag is-seconday">Popularity</span>
+            </div>
           </div>
-        </b-field>
+        </div>
 
         <div id="overview-text">{{ details.overview }}</div>
 
@@ -39,7 +39,7 @@
         <p class="subtitle is-6">Production: {{ details.production_countries }}</p>
 
         <div id="ok-button">
-          <b-button size="is-small" @click="showModal = false">OK</b-button>
+          <button @click="showModal = false" class="input">OK</button>
         </div>
       </div>
     </div>
