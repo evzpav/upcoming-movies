@@ -2,20 +2,28 @@
 
 NAME = upcoming-movies
 VERSION = 1.0.0
-PORT = 3000
+PORT = 4000
+FRAMEWORK=react
 
 install: ## install server and client dependencies locally
 	npm install
-	cd ./client && npm install
+	cd ./vue-client && npm install
+	cd ./react-client && npm install
 
-build-front: ## run locally
-	cd ./client && npm run build
+build-vue: ## Build static files for Vue
+	cd ./vue-client && npm run build
 
-run-front: ## run locally port 8080
-	cd client && npm run serve
+build-react: ## Build static files for React
+	cd ./react-client && npm run build
+
+run-vue: ## Run Vue frontend locally at port 8080
+	cd vue-client && npm run serve
+
+run-react: ## Run React frontend locally at port 3000
+	cd react-client && npm start
 
 run-target: ## run target
-	DOCKER_BUILDKIT=1 docker build  -t $(NAME):$(VERSION) --target=$(TARGET) .
+	DOCKER_BUILDKIT=1 docker build -t $(NAME):$(VERSION) --target=$(TARGET) .
 
 audit: ## run audit
 	make run-target TARGET=audit
@@ -46,9 +54,11 @@ run: ## run locally
 	node ./server/server.js
 
 lint: ## format code
-	cd ./client && npm run format
+	cd ./vue-client && npm run format
+	cd ./vue-client && npm run lint
+	cd ./react-client && npm run format
+	cd ./react-client && npm run lint
 	npm run format
-	cd ./client && npm run lint
 	npm run lint
 
 run-swagger:  ## run Swagger OpenAPI doc server.
