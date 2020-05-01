@@ -1,8 +1,9 @@
 # ---- Base Node ----
 FROM node:12-stretch-slim AS base
 ENV NODE_ENV=development
-RUN mkdir /server && chown -R node:node /server
-WORKDIR /server
+RUN mkdir /app && chown -R node:node /app
+RUN mkdir /app/vue-client && chown -R node:node /app/vue-client
+WORKDIR /app
 USER node
 RUN npm set progress=false && npm config set depth 0
 
@@ -12,30 +13,33 @@ COPY --chown=node:node package*.json ./
 RUN npm audit
 
 # ---- Dependencies ----
-FROM base AS dependencies
+FROM base AS server-dependencies
+WORKDIR /app
 COPY --chown=node:node package*.json ./
-RUN npm install --no-audit
-COPY --chown=node:node . ./
+RUN npm ci && npm cache clean --force
 
-#---- Test ----
-FROM dependencies AS test
+# #---- Test ----
+FROM server-dependencies AS test
+COPY --chown=node:node ./server ./server
 RUN npm test
 
-# ---- Front ----
-FROM base AS front
-WORKDIR /vue-client
+# ---- Frontend Dependencies ----
+FROM base AS front-dependencies
+WORKDIR /app/vue-client
 COPY --chown=node:node ./vue-client/package*.json ./
 RUN npm ci && npm cache clean --force
-COPY --chown=node:node /vue-client ./
+
+# ---- Front ----
+FROM front-dependencies AS front
+WORKDIR /app/vue-client
+COPY --chown=node:node ./vue-client ./
 RUN npm run build
 
 # ---- Release ----
-FROM front AS release
-WORKDIR /server
+FROM server-dependencies AS release
+WORKDIR /app
+COPY --chown=node:node --from=front /app/vue-client/build ./vue-client/build
+COPY --chown=node:node ./server ./server
 ENV NODE_ENV=production
-COPY --chown=node:node package*.json ./
-RUN npm ci && npm cache clean --force
-COPY --chown=node:node /server ./
-COPY --chown=node:node /server/server.js ./
-CMD [ "node","server.js"]
+CMD [ "node","server/server.js"]
 

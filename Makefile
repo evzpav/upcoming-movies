@@ -23,7 +23,9 @@ run-react: ## Run React frontend locally at port 3000
 	cd react-client && npm start
 
 run-target: ## run target
-	DOCKER_BUILDKIT=1 docker build -t $(NAME):$(VERSION) --target=$(TARGET) .
+	DOCKER_BUILDKIT=1	\
+	docker build -t $(NAME):$(VERSION) \
+	--target=$(TARGET) .
 
 audit: ## run audit
 	make run-target TARGET=audit
