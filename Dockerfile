@@ -28,7 +28,7 @@ RUN npm test
 FROM base AS front-dependencies
 WORKDIR /app/vue-client
 COPY --chown=node:node ./vue-client/package*.json ./
-RUN npm ci --production && npm cache clean --force
+RUN npm ci && npm cache clean --force
 
 # ---- Front ----
 FROM front-dependencies AS front
