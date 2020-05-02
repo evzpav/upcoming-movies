@@ -16,10 +16,11 @@ RUN npm audit
 FROM base AS server-dependencies
 WORKDIR /app
 COPY --chown=node:node package*.json ./
-RUN npm ci && npm cache clean --force
+RUN npm ci --production && npm cache clean --force
 
 # #---- Test ----
 FROM server-dependencies AS test
+RUN npm ci --development
 COPY --chown=node:node ./server ./server
 RUN npm test
 
@@ -27,7 +28,7 @@ RUN npm test
 FROM base AS front-dependencies
 WORKDIR /app/vue-client
 COPY --chown=node:node ./vue-client/package*.json ./
-RUN npm ci && npm cache clean --force
+RUN npm ci --production && npm cache clean --force
 
 # ---- Front ----
 FROM front-dependencies AS front
