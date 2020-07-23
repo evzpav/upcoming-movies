@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-
+include .env.local
 NAME = upcoming-movies
 VERSION = 1.0.0
 PORT = 4000

@@ -8,9 +8,9 @@ USER node
 RUN npm set progress=false && npm config set depth 0
 
 # ---- Audit ----
-FROM base AS audit
-COPY --chown=node:node package*.json ./
-RUN npm audit
+# FROM base AS audit
+# COPY --chown=node:node package*.json ./
+# RUN npm audit
 
 # ---- Dependencies ----
 FROM base AS server-dependencies
